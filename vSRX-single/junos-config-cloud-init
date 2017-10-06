@@ -1,0 +1,54 @@
+#junos-config
+system {
+    root-authentication {
+        encrypted-password "$5$Ik9pVEpF$/yOTVSiDJpQbgFGX8L.icVRsauuGc0HgONMMSCHk812"; ## SECRET-DATA
+    }
+    login {
+        user bart {
+            full-name "Bartosz Miklaszewski";
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCazpEMrUH/tmliXAH1xduBbiodcGEHv7j/C1gmJLPL1w1KiPhCoymqA/PUEERZDZ2Lpl02i0wL7ynP7s7uQ/2T5fmNWhjTY9/X+KuQ8vxUGSAWMKeD4/Hy5mJ+OeutsChbtztSGjKBJbogXHhO7xYXkGOylKVW3UuRUC2Wl0Brke0kw1ZRpgUBz6UjlXEncwYtVh0XcTaKG3KcOzEEoG1a3AE2DcFyLPJyXYuFqCERdAAqQR0vGUaQhZvash1CxBsUoCdi+xCfZ9cXH6v3VYg59Nrl1NGKfdRrQ1Il/uiBPfQ12XJo7oreciLAN2DMsytOXdxuy9y2xd/YugKGW3q/ bart@datacentred.co.uk"; ## SECRET-DATA
+            }
+        }
+        user matti {
+            full-name "Matt Illingworth";
+            uid 2001;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZIV98YFCbCTwB5VKahUsT0pmWuhp/posTRWaX98DNXRgdeLb0LoaINmZK1EtVWZFj9I7TRif3KOiZ2yvLmCiHaGYT5bQTfbaUbZ0fHEyNWymLHJ2tyjVyS9iTFqUBNieOs0WPmI+IIdEYpGIgUOF6xTfzh7fHGgSjfol5uwfWpG1VoWK11MtWQeYkQj4dSpnGJkeFrRZlIWrWZtOKxusr87Khxi7Vs8O4C+lOuFhjG8cTwpQ4OlWtVTPKnQ3zysrFYJhidqWskNrl7jnFr0LByhS2pI3Q6pVzLgVWHqqlVP+fJf+PTkR62jYnrwSeKMBZR1CaVodtokKk82ir8+Ot matt.illingworth@datacentred.co.uk"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login deny;
+            protocol-version v2;
+        }
+        netconf {
+            ssh;
+        }
+    }
+    syslog {
+        user * {
+            any emergency;
+        }
+        file messages {
+            any any;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+}
+interfaces {
+    fxp0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }
+        }
+    }
+}
