@@ -1,0 +1,19 @@
+
+---
+- name: Install all required IS24 RPMs
+  yum: name={{ item }} state=latest
+  with_items:
+    - bash-essentials
+    - is24-apache-maven
+    - is24-auditd
+    - is24-firefox24
+    - is24-jdk7
+    - is24-jenkins-agent
+    - is24-mongodb
+    - is24-monitoring-client
+    - is24-phantomjs
+    - is24-php-dependencies
+    - is24-repoclient
+    - is24-sysctl
+    - karma-runner
+    - yadtcontroller

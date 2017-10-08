@@ -1,0 +1,32 @@
+---
+- hosts: all
+  tasks:
+  - name: Install common stuff
+    yum: name={{ item }} state=latest
+    with_items:
+      - openssh-server
+      - lcov
+      - libjpeg-turbo
+      - xorg-x11-server-Xvfb
+      - rpm-build
+
+  - name: Install SCM systems
+    yum: name={{ item }} state=latest
+    with_items:
+      - git
+      - subversion
+
+  - name: Install build tools
+    yum: name={{ item }} state=latest
+    with_items:
+      - nodejs
+      - npm
+      - php-pecl-mongo
+      - PyYAML
+      - python
+      - python-boto
+      - python-imaging
+      - python-virtualenv
+      - sbt
+
+  - include: is24-packages.yml
